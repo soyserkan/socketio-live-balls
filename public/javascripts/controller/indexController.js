@@ -38,6 +38,7 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
                     };
 
                     $scope.messages.push(messageData);
+                    $scope.players[data.id]=data;
                     $scope.$apply();
 
                 });
@@ -51,6 +52,8 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
                         username:data.username
                     };
                     $scope.messages.push(messageData);
+                    delete $scope.players[data.id];
+
                     $scope.$apply();
                 });
 
