@@ -90,6 +90,12 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
 
                     $scope.messages.push(messageData);
                     $scope.message="";
+
+
+                    setTimeout(()=>{
+                        const element=document.getElementById('chat-area');
+                        element.scrollTop=element.scrollHeight;
+                    });
                 };
 
             }).catch((err)=>{
