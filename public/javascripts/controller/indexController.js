@@ -19,6 +19,14 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
             element.scrollTop=element.scrollHeight;
         });
     }
+    function showBubble(id, message) {
+        $('#'+id).find('.message').show().html(message);
+        setTimeout(()=>{
+            $('#'+id).find('.message').hide()
+        },2000);
+    }
+
+
 
     function initSocket(username) {
         const connectionOptions={
@@ -72,6 +80,7 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
                 socket.on('newMessage',message=>{
                     $scope.messages.push(message);
                     $scope.$apply();
+                    showBubble(message.socketId,message.text)
                     scrollTop();
                 });
 
@@ -102,9 +111,11 @@ app.controller('indexController',['$scope','indexFactory',($scope,indexFactory)=
 
                     $scope.messages.push(messageData);
                     $scope.message="";
+
                     socket.emit('newMessage',messageData);
 
 
+                    showBubble(socket.id,message);
                     scrollTop();
                 };
 
