@@ -39,6 +39,9 @@ io.on('connection',(socket)=>{
 
         socket.broadcast.emit('animate',{socketId:socket.id,x:data.x,y:data.y});
     });
+    socket.on('newMessage',data=>{
+        socket.broadcast.emit('newMessage',data);
+    });
 
 
 });
