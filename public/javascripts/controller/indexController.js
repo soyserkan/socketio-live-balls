@@ -36,7 +36,6 @@ app.controller('indexController',['$scope','indexFactory','configFactory',($scop
         try {
 
             const socketUrl=await configFactory.getConfig();
-            console.log();
             const socket = await indexFactory.connectSocket(socketUrl.data.socketUrl, connectionOptions);
             socket.emit('newUser', {username});
 
@@ -113,7 +112,7 @@ app.controller('indexController',['$scope','indexFactory','configFactory',($scop
                 };
 
                 $scope.messages.push(messageData);
-                $scope.message = "";
+                $scope.message = '';
 
                 socket.emit('newMessage', messageData);
 

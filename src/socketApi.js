@@ -19,24 +19,21 @@ io.on('connection',(socket)=>{
                 y:0
             },
             color:randomColor()
-        }
+        };
         const userData=Object.assign(data,defaultData);
-        users[socket.id]=(userData);
-        console.log(users);
-
+        users[socket.id]=userData;
         socket.broadcast.emit('newUser',users[socket.id]);
         socket.emit('initPlayers',users);
     });
     socket.on('disconnect',()=>{
         socket.broadcast.emit('disUser',users[socket.id]);
         delete users[socket.id];
-
-
     });
+
     socket.on('animate',(data)=>{
         try {
             users[socket.id].position.x=data.x;
-            users[socket.id].position.x=data.x;
+            users[socket.id].position.y=data.y;
 
             socket.broadcast.emit('animate',{socketId:socket.id,x:data.x,y:data.y});
 
